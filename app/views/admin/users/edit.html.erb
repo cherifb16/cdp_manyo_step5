@@ -1,0 +1,6 @@
+<h1>ユーザ編集ページ</h1>
+
+<%= render 'form', user: @user, user_form_url: admin_user_path(@user.id) %>
+
+<br>
+<%= link_to t('common.back'), admin_users_path, id: "back" %>

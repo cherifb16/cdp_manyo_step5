@@ -1,0 +1,55 @@
+<%= form_with(model: task, local: true) do |form| %>
+  <% if task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= task.errors.count %>件のエラーがあります</h2>
+
+      <ul>
+        <% task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :content %>
+    <%= form.text_area :content, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :deadline_on %>
+    <%= form.date_field :deadline_on, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :priority %>
+    <%= form.select :priority, Task.priorities.map { |k, _v| [t("enum.task.priority.#{k}"), k] }, { selected: task.priority, include_blank: true }, { class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :status %>
+    <%= form.select :status, Task.statuses.map { |k, _v| [t("enum.task.status.#{k}"), k] }, { selected: task.status, include_blank: true }, { class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :label_ids, "ラベル" %>
+    <div>
+      <%  @labels.each do |label| %>
+        <span class="mr-2">
+          <%= form.check_box :label_ids, { multiple: true, include_hidden: false }, label[:id] %>
+          <%= label.name %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <% task_button_id = controller.action_name == "new" ? "create-task" : "update-task" %>
+    <%= form.submit id: task_button_id, class: "btn btn-dark" %>
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+<h1>ラベル一覧ページ</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= Label.human_attribute_name(:name) %></th>
+      <th>タスク数</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @labels.each do |label| %>
+      <tr>
+        <td><%= label.name %></td>
+        <td><%= label.tasks.count %></td>
+        <td><%= link_to t('common.edit'), edit_label_path(label), class: "edit-label btn btn-primary" %></td>
+        <td><%= link_to t('common.destroy'), label, method: :delete, data: { confirm: t('common.confirm_destroy') }, class: "destroy-label btn btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

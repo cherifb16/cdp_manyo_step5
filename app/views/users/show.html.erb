@@ -1,0 +1,19 @@
+<h1>アカウント詳細ページ</h1>
+
+<p>
+  <strong><%= User.human_attribute_name(:name) %>:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong><%= User.human_attribute_name(:email) %>:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong><%= User.human_attribute_name(:admin) %>:</strong>
+  <%= @user.admin ? "あり" : "なし" %>
+</p>
+
+<%= link_to t('common.edit'), edit_user_path(@user), id: "edit-user" %> |
+<%= link_to t('common.back'), tasks_path, id: "back" %>
